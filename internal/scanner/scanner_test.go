@@ -1,4 +1,4 @@
-package scanner //nolint:revive // intentional package name matching the domain concept
+package scanner
 
 import (
 	"encoding/json"
