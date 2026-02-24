@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	semver "github.com/Masterminds/semver/v3"
+
 	"github.com/seanhalberthal/supplyscan/internal/types"
 )
 
@@ -233,11 +234,11 @@ func TestConvertBulkAdvisories_ExcludesPatchedVersions(t *testing.T) {
 	}
 
 	deps := []types.Dependency{
-		{Name: "minimatch", Version: "3.0.4"},  // vulnerable
-		{Name: "minimatch", Version: "3.1.3"},  // patched
-		{Name: "minimatch", Version: "5.1.6"},  // vulnerable
-		{Name: "minimatch", Version: "5.1.7"},  // patched
-		{Name: "minimatch", Version: "9.0.6"},  // not in vulnerable range
+		{Name: "minimatch", Version: "3.0.4"}, // vulnerable
+		{Name: "minimatch", Version: "3.1.3"}, // patched
+		{Name: "minimatch", Version: "5.1.6"}, // vulnerable
+		{Name: "minimatch", Version: "5.1.7"}, // patched
+		{Name: "minimatch", Version: "9.0.6"}, // not in vulnerable range
 	}
 
 	findings := convertBulkAdvisories(resp, deps)

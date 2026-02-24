@@ -11,6 +11,7 @@ import (
 	"time"
 
 	semver "github.com/Masterminds/semver/v3"
+
 	"github.com/seanhalberthal/supplyscan/internal/types"
 )
 
@@ -221,10 +222,10 @@ func parseVulnerableRange(vulnRange string) *semver.Constraints {
 // If the constraint is nil (unparseable or missing), the version is assumed vulnerable
 // as a safe fallback — the npm API already filtered for this package.
 //
-// Note: pre-release versions (e.g. "3.0.5-alpha.1") are NOT matched by constraints
-// like "<3.0.5" due to Masterminds/semver pre-release precedence rules. Such versions
-// will parse successfully but may not match the constraint, potentially producing
-// false negatives. This matches standard SemVer behaviour.
+// Pre-release versions (e.g. "3.0.5-alpha.1") are not matched by constraints like
+// "<3.0.5" due to Masterminds/semver pre-release precedence rules. Such versions will
+// parse successfully but may not match the constraint, potentially producing false
+// negatives. This matches standard SemVer behaviour.
 func isVersionVulnerable(version string, constraint *semver.Constraints) bool {
 	if constraint == nil {
 		// Cannot parse range; fall back to reporting (safe default)
