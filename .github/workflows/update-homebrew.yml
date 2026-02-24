@@ -20,6 +20,7 @@ jobs:
       - name: Validate tag
         env:
           TAG: ${{ inputs.tag }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
             echo "ERROR: Tag must match vX.Y.Z format (got: $TAG)" >&2
@@ -31,8 +32,6 @@ jobs:
             echo "ERROR: Release $TAG not found" >&2
             exit 1
           fi
-        env:
-          GH_TOKEN: ${{ github.token }}
 
       - name: Download release binaries and compute checksums
         env:
