@@ -50,6 +50,7 @@ func NewDetector(opts ...DetectorOption) (*Detector, error) {
 	if len(iocSources) == 0 {
 		iocSources = []IOCSource{
 			sources.NewDataDogSource(),
+			sources.NewDataDogTeamPCPSource(),
 			sources.NewGitHubAdvisorySource(),
 			sources.NewOSVSource(),
 		}

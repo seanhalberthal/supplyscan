@@ -1,6 +1,7 @@
 package supplychain
 
 import (
+	"slices"
 	"strings"
 )
 
@@ -22,6 +23,14 @@ var atRiskNamespaces = []string{
 	// s1ngularity campaign (August 2025) — credential harvesting via Nx build system
 	"@nx",
 	"@nrwl",
+	// Mini Shai-Hulud / TeamPCP campaign (April-May 2026) — self-spreading worm targeting
+	// SAP CAP, TanStack, AntV, and other npm scopes
+	"@cap-js",
+	"@tanstack",
+	"@antv",
+	"@lint-md",
+	"@openclaw-cn",
+	"@starmind",
 }
 
 // isAtRiskNamespace checks if a package name belongs to an at-risk namespace.
@@ -31,19 +40,13 @@ func isAtRiskNamespace(packageName string) bool {
 	}
 
 	// Extract the scope (e.g., "@ctrl" from "@ctrl/tinycolor")
-	slashIdx := strings.Index(packageName, "/")
-	if slashIdx == -1 {
+	before, _, ok := strings.Cut(packageName, "/")
+	if !ok {
 		return false
 	}
 
-	scope := packageName[:slashIdx]
-	for _, ns := range atRiskNamespaces {
-		if scope == ns {
-			return true
-		}
-	}
-
-	return false
+	scope := before
+	return slices.Contains(atRiskNamespaces, scope)
 }
 
 // getNamespaceWarning returns a warning message for an at-risk namespace.
