@@ -4,6 +4,8 @@
 
 - Add DataDog TeamPCP (Mini Shai-Hulud) IOC source for the self-spreading npm worm targeting SAP CAP, TanStack, AntV, and related scopes
 - Add at-risk namespace warnings for `@cap-js`, `@tanstack`, `@antv`, `@lint-md`, `@openclaw-cn`, and `@starmind`
+- Fix bun lockfile parser treating each entry's integrity hash as a duplicate package version (scans of bun projects were double-counting dependencies)
+- Group at-risk namespace notices by scope, name the campaign that put the scope on the list, and lead with "your installed version is not on any IOC list" so the section reads as informational rather than alarming
 
 ## [1.11.0](https://github.com/seanhalberthal/supplyscan/compare/v1.10.1...v1.11.0)
 
